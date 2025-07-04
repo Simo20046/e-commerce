@@ -244,6 +244,43 @@
             max-width: 420px; /* Constrain them too */
             margin: 0 auto;
         }
+
+        /* Product Detail Slider specific styles */
+        .product-image-slider {
+            position: relative;
+            overflow: hidden; /* Hide overflowing images during transition */
+        }
+
+        .product-image-slider img {
+            transition: opacity 0.3s ease-in-out; /* Fade effect for image change */
+        }
+
+        .slider-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .slider-nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav-button.left {
+            left: 10px;
+        }
+
+        .slider-nav-button.right {
+            right: 10px;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -306,7 +343,7 @@
         <section id="home" class="page-section active">
             <!-- Hero Section -->
             <div class="hero-section relative h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center justify-center text-white"
-                style="background-image: url('https://placehold.co/1920x1080/6a5acd/ffffff?text=Curated+Style+for+You');">
+                style="background-image: url('https://images.unsplash.com/photo-1528698827570-e38ae350c892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
                 <div class="absolute inset-0 hero-overlay"></div>
                 <div class="relative z-10 text-center px-4 animate-fade-in-up">
                     <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Discover Unique Creations</h1>
@@ -326,7 +363,7 @@
                         <!-- Product Card 1 -->
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <a href="#product-detail" data-product-id="1" class="product-link">
-                                <img src="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase" alt="Elegant Ceramic Vase" class="w-full h-64 object-cover">
+                                <img src="https://images.unsplash.com/photo-1571891170068-15c26b91c2c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Elegant Ceramic Vase" class="w-full h-64 object-cover">
                             </a>
                             <div class="p-6 flex-grow flex flex-col justify-between">
                                 <div>
@@ -336,7 +373,7 @@
                                 <div class="flex justify-between items-center mt-auto">
                                     <span class="text-2xl font-bold text-indigo-600">$49.99</span>
                                     <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                        data-product-id="1" data-product-name="Elegant Ceramic Vase" data-product-price="49.99" data-product-image="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase">
+                                        data-product-id="1" data-product-name="Elegant Ceramic Vase" data-product-price="49.99" data-product-image="https://images.unsplash.com/photo-1571891170068-15c26b91c2c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -346,7 +383,7 @@
                         <!-- Product Card 2 -->
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <a href="#product-detail" data-product-id="2" class="product-link">
-                                <img src="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket" alt="Organic Cotton Blanket" class="w-full h-64 object-cover">
+                                <img src="https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Organic Cotton Blanket" class="w-full h-64 object-cover">
                             </a>
                             <div class="p-6 flex-grow flex flex-col justify-between">
                                 <div>
@@ -356,7 +393,7 @@
                                 <div class="flex justify-between items-center mt-auto">
                                     <span class="text-2xl font-bold text-indigo-600">$79.00</span>
                                     <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                        data-product-id="2" data-product-name="Organic Cotton Blanket" data-product-price="79.00" data-product-image="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket">
+                                        data-product-id="2" data-product-name="Organic Cotton Blanket" data-product-price="79.00" data-product-image="https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -366,7 +403,7 @@
                         <!-- Product Card 3 -->
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <a href="#product-detail" data-product-id="3" class="product-link">
-                                <img src="https://placehold.co/600x400/c0c0c0/333333?text=Soy+Candle" alt="Hand-Poured Soy Candle" class="w-full h-64 object-cover">
+                                <img src="https://images.unsplash.com/photo-1626242337740-428669e46a8d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hand-Poured Soy Candle" class="w-full h-64 object-cover">
                             </a>
                             <div class="p-6 flex-grow flex flex-col justify-between">
                                 <div>
@@ -376,7 +413,7 @@
                                 <div class="flex justify-between items-center mt-auto">
                                     <span class="text-2xl font-bold text-indigo-600">$24.50</span>
                                     <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                        data-product-id="3" data-product-name="Hand-Poured Soy Candle" data-product-price="24.50" data-product-image="https://placehold.co/600x400/c0c0c0/333333?text=Soy+Candle">
+                                        data-product-id="3" data-product-name="Hand-Poured Soy Candle" data-product-price="24.50" data-product-image="https://images.unsplash.com/photo-1626242337740-428669e46a8d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -386,7 +423,7 @@
                         <!-- Product Card 4 -->
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <a href="#product-detail" data-product-id="4" class="product-link">
-                                <img src="https://placehold.co/600x400/b0b0b0/333333?text=Desk+Organizer" alt="Minimalist Desk Organizer" class="w-full h-64 object-cover">
+                                <img src="https://images.unsplash.com/photo-1611095973763-801ddf876d7e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Minimalist Desk Organizer" class="w-full h-64 object-cover">
                             </a>
                             <div class="p-6 flex-grow flex flex-col justify-between">
                                 <div>
@@ -396,7 +433,7 @@
                                 <div class="flex justify-between items-center mt-auto">
                                     <span class="text-2xl font-bold text-indigo-600">$35.00</span>
                                     <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                        data-product-id="4" data-product-name="Minimalist Desk Organizer" data-product-price="35.00" data-product-image="https://placehold.co/600x400/b0b0b0/333333?text=Desk+Organizer">
+                                        data-product-id="4" data-product-name="Minimalist Desk Organizer" data-product-price="35.00" data-product-image="https://images.unsplash.com/photo-1611095973763-801ddf876d7e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -416,7 +453,7 @@
             <div class="py-16 px-6 md:px-12 bg-gray-100">
                 <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
                     <div class="md:w-1/2">
-                        <img src="https://placehold.co/800x600/a0a0a0/ffffff?text=Our+Story" alt="Our Story" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                        <img src="https://images.unsplash.com/photo-1556955112-284059b6c86a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Our Story" class="rounded-xl shadow-lg w-full h-auto object-cover">
                     </div>
                     <div class="md:w-1/2">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Our Commitment to Quality & Craft</h2>
@@ -479,7 +516,7 @@
                     <!-- Product Card 1 (re-use from home for consistency) -->
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                         <a href="#product-detail" data-product-id="1" class="product-link">
-                            <img src="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase" alt="Elegant Ceramic Vase" class="w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1571891170068-15c26b91c2c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Elegant Ceramic Vase" class="w-full h-64 object-cover">
                         </a>
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
@@ -489,7 +526,7 @@
                             <div class="flex justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-indigo-600">$49.99</span>
                                 <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                    data-product-id="1" data-product-name="Elegant Ceramic Vase" data-product-price="49.99" data-product-image="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase">
+                                    data-product-id="1" data-product-name="Elegant Ceramic Vase" data-product-price="49.99" data-product-image="https://images.unsplash.com/photo-1571891170068-15c26b91c2c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                     Add to Cart
                                 </button>
                             </div>
@@ -499,7 +536,7 @@
                     <!-- Product Card 2 (re-use from home for consistency) -->
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                         <a href="#product-detail" data-product-id="2" class="product-link">
-                            <img src="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket" alt="Organic Cotton Blanket" class="w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Organic Cotton Blanket" class="w-full h-64 object-cover">
                         </a>
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
@@ -509,7 +546,7 @@
                             <div class="flex justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-indigo-600">$79.00</span>
                                 <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                    data-product-id="2" data-product-name="Organic Cotton Blanket" data-product-price="79.00" data-product-image="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket">
+                                    data-product-id="2" data-product-name="Organic Cotton Blanket" data-product-price="79.00" data-product-image="https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                     Add to Cart
                                 </button>
                             </div>
@@ -519,7 +556,7 @@
                     <!-- Product Card 5 -->
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                         <a href="#product-detail" data-product-id="5" class="product-link">
-                            <img src="https://placehold.co/600x400/a0a0a0/333333?text=Leather+Wallet" alt="Premium Leather Wallet" class="w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1598300042459-7000c017d23a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Premium Leather Wallet" class="w-full h-64 object-cover">
                         </a>
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
@@ -529,7 +566,7 @@
                             <div class="flex justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-indigo-600">$89.99</span>
                                 <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                    data-product-id="5" data-product-name="Premium Leather Wallet" data-product-price="89.99" data-product-image="https://placehold.co/600x400/a0a0a0/333333?text=Leather+Wallet">
+                                    data-product-id="5" data-product-name="Premium Leather Wallet" data-product-price="89.99" data-product-image="https://images.unsplash.com/photo-1598300042459-7000c017d23a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                     Add to Cart
                                 </button>
                             </div>
@@ -539,7 +576,7 @@
                     <!-- Product Card 6 -->
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                         <a href="#product-detail" data-product-id="6" class="product-link">
-                            <img src="https://placehold.co/600x400/909090/333333?text=Aromatherapy+Diffuser" alt="Modern Aromatherapy Diffuser" class="w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1620359747970-84f9b8c0c4c4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Aromatherapy Diffuser" class="w-full h-64 object-cover">
                         </a>
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
@@ -549,7 +586,7 @@
                             <div class="flex justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-indigo-600">$59.00</span>
                                 <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                    data-product-id="6" data-product-name="Modern Aromatherapy Diffuser" data-product-price="59.00" data-product-image="https://placehold.co/600x400/909090/333333?text=Aromatherapy+Diffuser">
+                                    data-product-id="6" data-product-name="Modern Aromatherapy Diffuser" data-product-price="59.00" data-product-image="https://images.unsplash.com/photo-1620359747970-84f9b8c0c4c4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                     Add to Cart
                                 </button>
                             </div>
@@ -559,7 +596,7 @@
                     <!-- Product Card 7 -->
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                         <a href="#product-detail" data-product-id="7" class="product-link">
-                            <img src="https://placehold.co/600x400/808080/333333?text=Ceramic+Mug" alt="Handmade Ceramic Mug" class="w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1615529124231-36c568f63c87?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Handmade Ceramic Mug" class="w-full h-64 object-cover">
                         </a>
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
@@ -569,7 +606,7 @@
                             <div class="flex justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-indigo-600">$18.00</span>
                                 <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                    data-product-id="7" data-product-name="Handmade Ceramic Mug" data-product-price="18.00" data-product-image="https://placehold.co/600x400/808080/333333?text=Ceramic+Mug">
+                                    data-product-id="7" data-product-name="Handmade Ceramic Mug" data-product-price="18.00" data-product-image="https://images.unsplash.com/photo-1615529124231-36c568f63c87?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                     Add to Cart
                                 </button>
                             </div>
@@ -579,7 +616,7 @@
                     <!-- Product Card 8 -->
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                         <a href="#product-detail" data-product-id="8" class="product-link">
-                            <img src="https://placehold.co/600x400/707070/333333?text=Wooden+Coasters" alt="Set of Wooden Coasters" class="w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Set of Wooden Coasters" class="w-full h-64 object-cover">
                         </a>
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
@@ -589,7 +626,7 @@
                             <div class="flex justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-indigo-600">$22.00</span>
                                 <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
-                                    data-product-id="8" data-product-name="Set of Wooden Coasters" data-product-price="22.00" data-product-image="https://placehold.co/600x400/707070/333333?text=Wooden+Coasters">
+                                    data-product-id="8" data-product-name="Set of Wooden Coasters" data-product-price="22.00" data-product-image="https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                                     Add to Cart
                                 </button>
                             </div>
@@ -603,14 +640,19 @@
         <section id="product-detail" class="page-section py-16 px-6 md:px-12">
             <div class="container mx-auto">
                 <div class="flex flex-col md:flex-row gap-12">
-                    <!-- Product Image Gallery -->
-                    <div class="md:w-1/2">
-                        <img id="product-detail-image" src="https://placehold.co/800x600/e0e0e0/333333?text=Product+Image" alt="Product Image" class="w-full rounded-xl shadow-lg mb-4">
-                        <div class="flex space-x-2 overflow-x-auto">
+                    <!-- Product Image Gallery (Slider) -->
+                    <div class="md:w-1/2 relative product-image-slider">
+                        <img id="product-detail-image" src="" alt="Product Image" class="w-full rounded-xl shadow-lg mb-4">
+                        <!-- Slider Navigation Buttons -->
+                        <button id="prev-image-btn" class="slider-nav-button left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="next-image-btn" class="slider-nav-button right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <div class="flex space-x-2 overflow-x-auto justify-center">
                             <!-- Thumbnails will be dynamically loaded/updated by JS -->
-                            <img src="https://placehold.co/150x100/e0e0e0/333333?text=View+1" alt="Thumbnail 1" class="product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500 active-thumbnail" data-full-image="https://placehold.co/800x600/e0e0e0/333333?text=Product+Image">
-                            <img src="https://placehold.co/150x100/d0d0d0/333333?text=View+2" alt="Thumbnail 2" class="product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500" data-full-image="https://placehold.co/800x600/d0d0d0/333333?text=Product+Image+2">
-                            <img src="https://placehold.co/150x100/c0c0c0/333333?text=View+3" alt="Thumbnail 3" class="product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500" data-full-image="https://placehold.co/800x600/c0c0c0/333333?text=Product+Image+3">
                         </div>
                     </div>
 
@@ -653,21 +695,21 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Related Product Card 1 (example) -->
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                            <img src="https://placehold.co/600x400/b0b0b0/333333?text=Related+Product+1" alt="Related Product 1" class="w-full h-48 object-cover">
+                            <img src="https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Related Product 1" class="w-full h-48 object-cover">
                             <div class="p-4 flex-grow">
                                 <h3 class="text-lg font-semibold text-gray-800">Another Great Item</h3>
                                 <p class="text-gray-600 text-sm">$29.99</p>
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                            <img src="https://placehold.co/600x400/a0a0a0/333333?text=Related+Product+2" alt="Related Product 2" class="w-full h-48 object-cover">
+                            <img src="https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Related Product 2" class="w-full h-48 object-cover">
                             <div class="p-4 flex-grow">
                                 <h3 class="text-lg font-semibold text-gray-800">Complementary Piece</h3>
                                 <p class="text-gray-600 text-sm">$45.00</p>
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                            <img src="https://placehold.co/600x400/909090/333333?text=Related+Product+3" alt="Related Product 3" class="w-full h-48 object-cover">
+                            <img src="https://images.unsplash.com/photo-1582057774130-9773b0625d80?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Related Product 3" class="w-full h-48 object-cover">
                             <div class="p-4 flex-grow">
                                 <h3 class="text-lg font-semibold text-gray-800">Similar Style</h3>
                                 <p class="text-gray-600 text-sm">$65.00</p>
@@ -687,7 +729,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Collection Card 1 -->
                     <div class="bg-white rounded-xl shadow-md overflow-hidden product-card">
-                        <img src="https://placehold.co/600x400/7b68ee/ffffff?text=Cozy+Home" alt="Cozy Home Collection" class="w-full h-64 object-cover">
+                        <img src="https://images.unsplash.com/photo-1593026857857-41481e18b857?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cozy Home Collection" class="w-full h-64 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Cozy Home Essentials</h3>
                             <p class="text-gray-600 text-sm">Comfort and warmth for your living space.</p>
@@ -696,7 +738,7 @@
                     </div>
                     <!-- Collection Card 2 -->
                     <div class="bg-white rounded-xl shadow-md overflow-hidden product-card">
-                        <img src="https://placehold.co/600x400/8a2be2/ffffff?text=Minimalist+Living" alt="Minimalist Living Collection" class="w-full h-64 object-cover">
+                        <img src="https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Minimalist Living Collection" class="w-full h-64 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Minimalist Living</h3>
                             <p class="text-gray-600 text-sm">Clean lines and functional beauty for a serene home.</p>
@@ -705,7 +747,7 @@
                     </div>
                     <!-- Collection Card 3 -->
                     <div class="bg-white rounded-xl shadow-md overflow-hidden product-card">
-                        <img src="https://placehold.co/600x400/4682b4/ffffff?text=Sustainable+Finds" alt="Sustainable Finds Collection" class="w-full h-64 object-cover">
+                        <img src="https://images.unsplash.com/photo-1556955112-284059b6c86a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sustainable Finds Collection" class="w-full h-64 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Sustainable Finds</h3>
                             <p class="text-gray-600 text-sm">Eco-friendly products for a conscious lifestyle.</p>
@@ -811,7 +853,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">About Curated Creations</h2>
 
                 <div class="bg-white rounded-xl shadow-md p-8 mb-8">
-                    <img src="https://placehold.co/1200x600/a0a0a0/ffffff?text=Our+Journey" alt="Our Journey" class="w-full rounded-lg mb-8">
+                    <img src="https://images.unsplash.com/photo-1556955112-284059b6c86a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Our Journey" class="w-full rounded-lg mb-8">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-4">Our Story: Passion for Craft and Purpose</h3>
                     <p class="text-gray-700 leading-relaxed mb-6">
                         Curated Creations was born from a simple idea: to bring beauty, quality, and meaning into everyday lives through thoughtfully selected products. In a world of mass production, we saw a need for a space where craftsmanship is celebrated, and every item tells a unique story.
@@ -955,33 +997,66 @@
     <script>
         // Global state for products and cart
         const products = [
-            { id: '1', name: 'Elegant Ceramic Vase', price: 49.99, image: 'https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase', description: 'Handcrafted with a minimalist design, perfect for any home. Made from high-quality ceramic, this vase adds a touch of sophistication to any room. Its sleek lines and matte finish make it a versatile piece for modern and traditional decor alike.',
-              altImages: ['https://placehold.co/800x600/e0e0e0/333333?text=Elegant+Vase+1', 'https://placehold.co/800x600/d0d0d0/333333?text=Elegant+Vase+2', 'https://placehold.co/800x600/c0c0c0/333333?text=Elegant+Vase+3']
+            { id: '1', name: 'Elegant Ceramic Vase', price: 49.99, image: 'https://images.unsplash.com/photo-1571891170068-15c26b91c2c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Handcrafted with a minimalist design, perfect for any home. Made from high-quality ceramic, this vase adds a touch of sophistication to any room. Its sleek lines and matte finish make it a versatile piece for modern and traditional decor alike.',
+              altImages: [
+                'https://images.unsplash.com/photo-1571891170068-15c26b91c2c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1582057774130-9773b0625d80?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1593026857857-41481e18b857?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '2', name: 'Organic Cotton Blanket', price: 79.00, image: 'https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket', description: 'Soft, breathable, and sustainably sourced for ultimate comfort. This blanket is made from 100% organic cotton, ensuring a gentle touch against your skin and a reduced environmental footprint. Perfect for cozy evenings.',
-              altImages: ['https://placehold.co/800x600/d0d0d0/333333?text=Cotton+Blanket+1', 'https://placehold.co/800x600/c0c0c0/333333?text=Cotton+Blanket+2', 'https://placehold.co/800x600/b0b0b0/333333?text=Cotton+Blanket+3']
+            { id: '2', name: 'Organic Cotton Blanket', price: 79.00, image: 'https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Soft, breathable, and sustainably sourced for ultimate comfort. This blanket is made from 100% organic cotton, ensuring a gentle touch against your skin and a reduced environmental footprint. Perfect for cozy evenings.',
+              altImages: [
+                'https://images.unsplash.com/photo-1582057790380-0435940d995c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '3', name: 'Hand-Poured Soy Candle', price: 24.50, image: 'https://placehold.co/600x400/c0c0c0/333333?text=Soy+Candle', description: 'Infused with natural essential oils for a calming ambiance. Our soy candles are hand-poured in small batches, offering a clean burn and long-lasting fragrance. Choose from a variety of soothing scents to create your perfect atmosphere.',
-              altImages: ['https://placehold.co/800x600/c0c0c0/333333?text=Soy+Candle+1', 'https://placehold.co/800x600/b0b0b0/333333?text=Soy+Candle+2', 'https://placehold.co/800x600/a0a0a0/333333?text=Soy+Candle+3']
+            { id: '3', name: 'Hand-Poured Soy Candle', price: 24.50, image: 'https://images.unsplash.com/photo-1626242337740-428669e46a8d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Infused with natural essential oils for a calming ambiance. Our soy candles are hand-poured in small batches, offering a clean burn and long-lasting fragrance. Choose from a variety of soothing scents to create your perfect atmosphere.',
+              altImages: [
+                'https://images.unsplash.com/photo-1626242337740-428669e46a8d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1593026857857-41481e18b857?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '4', name: 'Minimalist Desk Organizer', price: 35.00, image: 'https://placehold.co/600x400/b0b0b0/333333?text=Desk+Organizer', description: 'Keep your workspace tidy with this sleek wooden organizer. Designed for efficiency and aesthetics, it provides dedicated compartments for pens, notes, and small accessories, helping you maintain a clutter-free and productive environment.',
-              altImages: ['https://placehold.co/800x600/b0b0b0/333333?text=Desk+Organizer+1', 'https://placehold.co/800x600/a0a0a0/333333?text=Desk+Organizer+2', 'https://placehold.co/800x600/909090/333333?text=Desk+Organizer+3']
+            { id: '4', name: 'Minimalist Desk Organizer', price: 35.00, image: 'https://images.unsplash.com/photo-1611095973763-801ddf876d7e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Keep your workspace tidy with this sleek wooden organizer. Designed for efficiency and aesthetics, it provides dedicated compartments for pens, notes, and small accessories, helping you maintain a clutter-free and productive environment.',
+              altImages: [
+                'https://images.unsplash.com/photo-1611095973763-801ddf876d7e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '5', name: 'Premium Leather Wallet', price: 89.99, image: 'https://placehold.co/600x400/a0a0a0/333333?text=Leather+Wallet', description: 'Crafted from full-grain leather, designed for durability and timeless style. This wallet features multiple card slots, a bill compartment, and a coin pocket, combining functionality with elegant design. It ages beautifully with use.',
-              altImages: ['https://placehold.co/800x600/a0a0a0/333333?text=Leather+Wallet+1', 'https://placehold.co/800x600/909090/333333?text=Leather+Wallet+2', 'https://placehold.co/800x600/808080/333333?text=Leather+Wallet+3']
+            { id: '5', name: 'Premium Leather Wallet', price: 89.99, image: 'https://images.unsplash.com/photo-1598300042459-7000c017d23a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Crafted from full-grain leather, designed for durability and timeless style. This wallet features multiple card slots, a bill compartment, and a coin pocket, combining functionality with elegant design. It ages beautifully with use.',
+              altImages: [
+                'https://images.unsplash.com/photo-1598300042459-7000c017d23a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '6', name: 'Modern Aromatherapy Diffuser', price: 59.00, image: 'https://placehold.co/600x400/909090/333333?text=Aromatherapy+Diffuser', description: 'Ultrasonic diffuser with ambient light settings to enhance your relaxation. This sleek diffuser disperses essential oils into a fine mist, humidifying the air and filling your space with your favorite aromas. Features auto-off for safety.',
-              altImages: ['https://placehold.co/800x600/909090/333333?text=Diffuser+1', 'https://placehold.co/800x600/808080/333333?text=Diffuser+2', 'https://placehold.co/800x600/707070/333333?text=Diffuser+3']
+            { id: '6', name: 'Modern Aromatherapy Diffuser', price: 59.00, image: 'https://images.unsplash.com/photo-1620359747970-84f9b8c0c4c4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Ultrasonic diffuser with ambient light settings to enhance your relaxation. This sleek diffuser disperses essential oils into a fine mist, humidifying the air and filling your space with your favorite aromas. Features auto-off for safety.',
+              altImages: [
+                'https://images.unsplash.com/photo-1620359747970-84f9b8c0c4c4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1593026857857-41481e18b857?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '7', name: 'Handmade Ceramic Mug', price: 18.00, image: 'https://placehold.co/600x400/808080/333333?text=Ceramic+Mug', description: 'Unique glazed finish, perfect for your morning coffee or tea. Each mug is individually handmade, resulting in slight variations that make every piece unique. Dishwasher and microwave safe for convenience.',
-              altImages: ['https://placehold.co/800x600/808080/333333?text=Mug+1', 'https://placehold.co/800x600/707070/333333?text=Mug+2', 'https://placehold.co/800x600/606060/333333?text=Mug+3']
+            { id: '7', name: 'Handmade Ceramic Mug', price: 18.00, image: 'https://images.unsplash.com/photo-1615529124231-36c568f63c87?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Unique glazed finish, perfect for your morning coffee or tea. Each mug is individually handmade, resulting in slight variations that make every piece unique. Dishwasher and microwave safe for convenience.',
+              altImages: [
+                'https://images.unsplash.com/photo-1615529124231-36c568f63c87?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1593026857857-41481e18b857?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             },
-            { id: '8', name: 'Set of Wooden Coasters', price: 22.00, image: 'https://placehold.co/600x400/707070/333333?text=Wooden+Coasters', description: 'Protect your surfaces with these elegant, natural wood coasters. Crafted from sustainably sourced wood, these coasters feature a smooth finish and a minimalist design that complements any decor. Comes in a set of four.',
-              altImages: ['https://placehold.co/800x600/707070/333333?text=Coasters+1', 'https://placehold.co/800x600/606060/333333?text=Coasters+2', 'https://placehold.co/800x600/505050/333333?text=Coasters+3']
+            { id: '8', name: 'Set of Wooden Coasters', price: 22.00, image: 'https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Protect your surfaces with these elegant, natural wood coasters. Crafted from sustainably sourced wood, these coasters feature a smooth finish and a minimalist design that complements any decor. Comes in a set of four.',
+              altImages: [
+                'https://images.unsplash.com/photo-1599878233405-b7782637a77d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1563820232-a72081d5964f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                'https://images.unsplash.com/photo-1593026857857-41481e18b857?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              ]
             }
         ];
 
         let cart = []; // Array to store cart items: { productId, name, price, image, quantity }
+        let currentProductImageIndex = 0; // For the product detail page slider
 
         // --- DOM Elements ---
         const mainHeader = document.getElementById('main-header');
@@ -1012,6 +1087,8 @@
         const productDetailDescription = document.getElementById('product-detail-description');
         const quantitySelect = document.getElementById('quantity-select');
         const addToCartDetailBtn = document.getElementById('add-to-cart-detail-btn');
+        const prevImageBtn = document.getElementById('prev-image-btn');
+        const nextImageBtn = document.getElementById('next-image-btn');
 
         // Cart Page elements
         const cartItemsContainer = document.getElementById('cart-items-container');
@@ -1191,6 +1268,50 @@
         }
 
         /**
+         * Displays the current image in the product detail slider.
+         * @param {object} product - The product object.
+         */
+        function displayProductImage(product) {
+            const imagesToDisplay = product.altImages || [product.image];
+            productDetailImage.src = imagesToDisplay[currentProductImageIndex];
+
+            // Update thumbnails
+            productDetailThumbnailsContainer.innerHTML = '';
+            imagesToDisplay.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `Thumbnail ${index + 1}`;
+                img.className = `product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500 ${index === currentProductImageIndex ? 'active-thumbnail' : ''}`;
+                img.dataset.imageIndex = index; // Store index for click event
+                img.addEventListener('click', (event) => {
+                    currentProductImageIndex = parseInt(event.target.dataset.imageIndex);
+                    displayProductImage(product); // Re-render with new index
+                });
+                productDetailThumbnailsContainer.appendChild(img);
+            });
+        }
+
+        /**
+         * Shows the next image in the product detail slider.
+         * @param {object} product - The product object.
+         */
+        function showNextImage(product) {
+            const imagesToDisplay = product.altImages || [product.image];
+            currentProductImageIndex = (currentProductImageIndex + 1) % imagesToDisplay.length;
+            displayProductImage(product);
+        }
+
+        /**
+         * Shows the previous image in the product detail slider.
+         * @param {object} product - The product object.
+         */
+        function showPrevImage(product) {
+            const imagesToDisplay = product.altImages || [product.image];
+            currentProductImageIndex = (currentProductImageIndex - 1 + imagesToDisplay.length) % imagesToDisplay.length;
+            displayProductImage(product);
+        }
+
+        /**
          * Displays a specific page section and hides others.
          * @param {string} pageId - The ID of the page section to display (e.g., 'home', 'shop').
          * @param {string} productId - Optional. The ID of the product to load if navigating to 'product-detail'.
@@ -1212,7 +1333,6 @@
                     if (pageId === 'product-detail' && productId) {
                         const product = products.find(p => p.id === productId);
                         if (product) {
-                            productDetailImage.src = product.image;
                             productDetailName.textContent = product.name;
                             productDetailPrice.textContent = `$${product.price.toFixed(2)}`;
                             productDetailDescription.textContent = product.description;
@@ -1222,24 +1342,16 @@
                             addToCartDetailBtn.dataset.productPrice = product.price;
                             addToCartDetailBtn.dataset.productImage = product.image;
 
-                            // Populate and update product thumbnails
-                            productDetailThumbnailsContainer.innerHTML = '';
-                            const imagesToDisplay = [product.image, ...(product.altImages || [])];
-                            imagesToDisplay.forEach((imgSrc, index) => {
-                                const img = document.createElement('img');
-                                img.src = imgSrc;
-                                img.alt = `Product Thumbnail ${index + 1}`;
-                                img.className = `product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500 ${index === 0 ? 'active-thumbnail' : ''}`;
-                                img.dataset.fullImage = imgSrc;
-                                img.addEventListener('click', () => {
-                                    productDetailImage.src = imgSrc;
-                                    // Remove active class from all thumbnails
-                                    document.querySelectorAll('.product-thumbnail').forEach(thumb => thumb.classList.remove('active-thumbnail'));
-                                    // Add active class to clicked thumbnail
-                                    img.classList.add('active-thumbnail');
-                                });
-                                productDetailThumbnailsContainer.appendChild(img);
-                            });
+                            currentProductImageIndex = 0; // Reset slider to first image
+                            displayProductImage(product); // Display initial image and thumbnails
+
+                            // Remove previous listeners to prevent duplicates
+                            prevImageBtn.onclick = null;
+                            nextImageBtn.onclick = null;
+
+                            // Add event listeners for slider navigation
+                            prevImageBtn.onclick = () => showPrevImage(product);
+                            nextImageBtn.onclick = () => showNextImage(product);
 
                         } else {
                             // Handle product not found, maybe redirect to shop page
