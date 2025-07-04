@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curated Creations - Modern E-commerce</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8; /* Light background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a8a8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #888;
+        }
+
+        /* Subtle hover effect for buttons */
+        .btn-primary {
+            transition: all 0.3s ease-out;
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Product card hover effect */
+        .product-card {
+            transition: all 0.3s ease-out;
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero section overlay for text readability */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        /* Hero background parallax effect */
+        .hero-section {
+            background-attachment: fixed; /* For parallax */
+        }
+
+        /* Header shadow on scroll */
+        .header-scrolled {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom modal styles */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fff;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1001;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Page transition animation */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Product image gallery thumbnail hover */
+        .product-thumbnail {
+            transition: border-color 0.2s ease-out, transform 0.1s ease-out;
+        }
+        .product-thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .product-thumbnail.active-thumbnail {
+            border-color: #6366f1; /* Tailwind indigo-500 */
+        }
+
+        /* Input focus animation */
+        input:focus, select:focus, textarea:focus {
+            border-color: #6366f1; /* Tailwind indigo-500 */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); /* Tailwind indigo-500 with opacity */
+        }
+        input, select, textarea {
+            transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        /* Cart item quantity input animation */
+        .quantity-input {
+            transition: all 0.2s ease-out;
+        }
+        .quantity-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Remove from cart button animation */
+        .remove-from-cart-btn {
+            transition: color 0.2s ease-out, transform 0.1s ease-out;
+        }
+        .remove-from-cart-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Newsletter subscribe button animation */
+        .newsletter-btn {
+            transition: all 0.3s ease-out;
+        }
+        .newsletter-btn:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+        .newsletter-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Social icons hover */
+        .social-icon {
+            transition: transform 0.2s ease-out, color 0.2s ease-out;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #fff;
+        }
+
+        /* Search bar specific styles */
+        .search-bar-container {
+            position: absolute;
+            top: 100%; /* Position below the header */
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1rem 1.5rem;
+            transform: translateY(-100%); /* Start hidden above */
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+            z-index: 40; /* Below header, above content */
+        }
+        .search-bar-container.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* New styles for mode switching */
+        .mode-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-switcher button {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid #e0e0e0;
+            color: #555;
+            background-color: #f0f0f0;
+        }
+
+        .mode-switcher button.active-mode,
+        .mode-switcher button:hover {
+            background-color: #6366f1; /* indigo-500 */
+            color: white;
+            border-color: #6366f1;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Styles for simulating mobile view - MODIFIED */
+        body.mobile-mode {
+            width: 100%; /* Take full width of the preview area */
+            max-width: 420px; /* Still constrain to typical phone width for visual simulation */
+            margin: 0 auto; /* Center the simulated phone view */
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            transition: max-width 0.5s ease-in-out, margin 0.5s ease-in-out, box-shadow 0.5s ease-in-out, border 0.5s ease-in-out;
+        }
+
+        /* Ensure header and footer also respect the mobile mode width */
+        body.mobile-mode header,
+        body.mobile-mode footer,
+        body.mobile-mode main {
+            width: 100%; /* Ensure they take full width of the constrained body */
+            max-width: 420px; /* Constrain them too */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header id="main-header" class="bg-white shadow-sm py-4 px-6 md:px-12 sticky top-0 z-50 transition-shadow duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="text-2xl font-bold text-gray-800 tracking-wider">Curated <span class="text-indigo-600">Creations</span></a>
+
+            <!-- Navigation (Desktop) -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300 font-medium">Home</a>
+                <a href="#shop" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300 font-medium">Shop</a>
+                <a href="#collections" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300 font-medium">Collections</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300 font-medium">About Us</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300 font-medium">Contact</a>
+            </nav>
+
+            <!-- Icons (Search, Cart, Mobile Menu) -->
+            <div class="flex items-center space-x-6">
+                <button id="search-icon-button" class="text-gray-600 hover:text-indigo-600 transition duration-300">
+                    <i class="fas fa-search text-lg"></i>
+                </button>
+                <button id="cart-icon" class="text-gray-600 hover:text-indigo-600 transition duration-300 relative">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transform scale-90 origin-center transition-transform duration-200">0</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-600 transition duration-300">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Bar (Initially hidden) -->
+        <div id="search-bar-container" class="search-bar-container">
+            <div class="container mx-auto flex items-center space-x-4">
+                <input type="text" id="search-input" placeholder="Search for products..."
+                    class="flex-grow p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button id="close-search-button" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation (Hidden by default) -->
+        <nav id="mobile-menu" class="md:hidden mt-4 space-y-2 hidden">
+            <a href="#home" class="nav-link block text-gray-700 hover:bg-gray-100 py-2 px-4 rounded-md font-medium">Home</a>
+            <a href="#shop" class="nav-link block text-gray-700 hover:bg-gray-100 py-2 px-4 rounded-md font-medium">Shop</a>
+            <a href="#collections" class="nav-link block text-gray-700 hover:bg-gray-100 py-2 px-4 rounded-md font-medium">Collections</a>
+            <a href="#about" class="nav-link block text-gray-700 hover:bg-gray-100 py-2 px-4 rounded-md font-medium">About Us</a>
+            <a href="#contact" class="nav-link block text-gray-700 hover:bg-gray-100 py-2 px-4 rounded-md font-medium">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area - Contains all page sections -->
+    <main>
+        <!-- Home Page Section -->
+        <section id="home" class="page-section active">
+            <!-- Hero Section -->
+            <div class="hero-section relative h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center justify-center text-white"
+                style="background-image: url('https://placehold.co/1920x1080/6a5acd/ffffff?text=Curated+Style+for+You');">
+                <div class="absolute inset-0 hero-overlay"></div>
+                <div class="relative z-10 text-center px-4 animate-fade-in-up">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Discover Unique Creations</h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Hand-picked items that tell a story and elevate your everyday.</p>
+                    <a href="#shop" class="nav-link btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg">
+                        Shop Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Featured Products Section (Home Page) -->
+            <div class="py-16 px-6 md:px-12">
+                <div class="container mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Our Featured Picks</h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Product Card 1 -->
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <a href="#product-detail" data-product-id="1" class="product-link">
+                                <img src="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase" alt="Elegant Ceramic Vase" class="w-full h-64 object-cover">
+                            </a>
+                            <div class="p-6 flex-grow flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Elegant Ceramic Vase</h3>
+                                    <p class="text-gray-600 mb-4 text-sm">Handcrafted with a minimalist design, perfect for any home.</p>
+                                </div>
+                                <div class="flex justify-between items-center mt-auto">
+                                    <span class="text-2xl font-bold text-indigo-600">$49.99</span>
+                                    <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                        data-product-id="1" data-product-name="Elegant Ceramic Vase" data-product-price="49.99" data-product-image="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 2 -->
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <a href="#product-detail" data-product-id="2" class="product-link">
+                                <img src="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket" alt="Organic Cotton Blanket" class="w-full h-64 object-cover">
+                            </a>
+                            <div class="p-6 flex-grow flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Organic Cotton Blanket</h3>
+                                    <p class="text-gray-600 mb-4 text-sm">Soft, breathable, and sustainably sourced for ultimate comfort.</p>
+                                </div>
+                                <div class="flex justify-between items-center mt-auto">
+                                    <span class="text-2xl font-bold text-indigo-600">$79.00</span>
+                                    <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                        data-product-id="2" data-product-name="Organic Cotton Blanket" data-product-price="79.00" data-product-image="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 3 -->
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <a href="#product-detail" data-product-id="3" class="product-link">
+                                <img src="https://placehold.co/600x400/c0c0c0/333333?text=Soy+Candle" alt="Hand-Poured Soy Candle" class="w-full h-64 object-cover">
+                            </a>
+                            <div class="p-6 flex-grow flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Hand-Poured Soy Candle</h3>
+                                    <p class="text-gray-600 mb-4 text-sm">Infused with natural essential oils for a calming ambiance.</p>
+                                </div>
+                                <div class="flex justify-between items-center mt-auto">
+                                    <span class="text-2xl font-bold text-indigo-600">$24.50</span>
+                                    <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                        data-product-id="3" data-product-name="Hand-Poured Soy Candle" data-product-price="24.50" data-product-image="https://placehold.co/600x400/c0c0c0/333333?text=Soy+Candle">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 4 -->
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <a href="#product-detail" data-product-id="4" class="product-link">
+                                <img src="https://placehold.co/600x400/b0b0b0/333333?text=Desk+Organizer" alt="Minimalist Desk Organizer" class="w-full h-64 object-cover">
+                            </a>
+                            <div class="p-6 flex-grow flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Minimalist Desk Organizer</h3>
+                                    <p class="text-gray-600 mb-4 text-sm">Keep your workspace tidy with this sleek wooden organizer.</p>
+                                </div>
+                                <div class="flex justify-between items-center mt-auto">
+                                    <span class="text-2xl font-bold text-indigo-600">$35.00</span>
+                                    <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                        data-product-id="4" data-product-name="Minimalist Desk Organizer" data-product-price="35.00" data-product-image="https://placehold.co/600x400/b0b0b0/333333?text=Desk+Organizer">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-12">
+                        <a href="#shop" class="nav-link btn-primary border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-3 px-8 rounded-full">
+                            View All Products
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Us / Brand Story Section (Home Page - condensed) -->
+            <div class="py-16 px-6 md:px-12 bg-gray-100">
+                <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/800x600/a0a0a0/ffffff?text=Our+Story" alt="Our Story" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Our Commitment to Quality & Craft</h2>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            At Curated Creations, we believe every item in your home should bring joy and reflect your unique style. We meticulously source products from independent artisans and ethical manufacturers...
+                        </p>
+                        <a href="#about" class="nav-link btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-md">
+                            Learn More About Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Signup Section (Home Page) -->
+            <div class="py-16 px-6 md:px-12 bg-indigo-600 text-white">
+                <div class="container mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Inspired</h2>
+                    <p class="text-lg mb-8 max-w-2xl mx-auto">Join our community for exclusive updates, new arrivals, and special offers.</p>
+                    <form class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-xl mx-auto">
+                        <input type="email" placeholder="Enter your email address"
+                            class="w-full sm:flex-grow p-4 rounded-full border-2 border-white bg-transparent text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-white">
+                        <button type="submit" class="btn-primary newsletter-btn bg-white text-indigo-600 font-semibold py-4 px-8 rounded-full shadow-md w-full sm:w-auto">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shop Page Section -->
+        <section id="shop" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Shop All Products</h2>
+
+                <!-- Filters and Sorting (placeholder) -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                    <div class="flex items-center space-x-4">
+                        <label for="sort" class="text-gray-700 font-medium">Sort by:</label>
+                        <select id="sort" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="featured">Featured</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="newest">Newest Arrivals</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="category" class="text-gray-700 font-medium">Category:</label>
+                        <select id="category" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="all">All</option>
+                            <option value="home-decor">Home Decor</option>
+                            <option value="textiles">Textiles</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="wellness">Wellness</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- More Product Cards for Shop Page (example) -->
+                    <!-- Product Card 1 (re-use from home for consistency) -->
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                        <a href="#product-detail" data-product-id="1" class="product-link">
+                            <img src="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase" alt="Elegant Ceramic Vase" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Elegant Ceramic Vase</h3>
+                                <p class="text-gray-600 mb-4 text-sm">Handcrafted with a minimalist design, perfect for any home.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-indigo-600">$49.99</span>
+                                <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                    data-product-id="1" data-product-name="Elegant Ceramic Vase" data-product-price="49.99" data-product-image="https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 (re-use from home for consistency) -->
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                        <a href="#product-detail" data-product-id="2" class="product-link">
+                            <img src="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket" alt="Organic Cotton Blanket" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Organic Cotton Blanket</h3>
+                                <p class="text-gray-600 mb-4 text-sm">Soft, breathable, and sustainably sourced for ultimate comfort.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-indigo-600">$79.00</span>
+                                <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                    data-product-id="2" data-product-name="Organic Cotton Blanket" data-product-price="79.00" data-product-image="https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 5 -->
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                        <a href="#product-detail" data-product-id="5" class="product-link">
+                            <img src="https://placehold.co/600x400/a0a0a0/333333?text=Leather+Wallet" alt="Premium Leather Wallet" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Premium Leather Wallet</h3>
+                                <p class="text-gray-600 mb-4 text-sm">Crafted from full-grain leather, designed for durability.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-indigo-600">$89.99</span>
+                                <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                    data-product-id="5" data-product-name="Premium Leather Wallet" data-product-price="89.99" data-product-image="https://placehold.co/600x400/a0a0a0/333333?text=Leather+Wallet">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 6 -->
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                        <a href="#product-detail" data-product-id="6" class="product-link">
+                            <img src="https://placehold.co/600x400/909090/333333?text=Aromatherapy+Diffuser" alt="Modern Aromatherapy Diffuser" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Modern Aromatherapy Diffuser</h3>
+                                <p class="text-gray-600 mb-4 text-sm">Ultrasonic diffuser with ambient light settings.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-indigo-600">$59.00</span>
+                                <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                    data-product-id="6" data-product-name="Modern Aromatherapy Diffuser" data-product-price="59.00" data-product-image="https://placehold.co/600x400/909090/333333?text=Aromatherapy+Diffuser">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 7 -->
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                        <a href="#product-detail" data-product-id="7" class="product-link">
+                            <img src="https://placehold.co/600x400/808080/333333?text=Ceramic+Mug" alt="Handmade Ceramic Mug" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Handmade Ceramic Mug</h3>
+                                <p class="text-gray-600 mb-4 text-sm">Unique glazed finish, perfect for your morning coffee.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-indigo-600">$18.00</span>
+                                <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                    data-product-id="7" data-product-name="Handmade Ceramic Mug" data-product-price="18.00" data-product-image="https://placehold.co/600x400/808080/333333?text=Ceramic+Mug">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 8 -->
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                        <a href="#product-detail" data-product-id="8" class="product-link">
+                            <img src="https://placehold.co/600x400/707070/333333?text=Wooden+Coasters" alt="Set of Wooden Coasters" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Set of Wooden Coasters</h3>
+                                <p class="text-gray-600 mb-4 text-sm">Protect your surfaces with these elegant, natural wood coasters.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-indigo-600">$22.00</span>
+                                <button class="add-to-cart-btn bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-white transition duration-300 py-2 px-4 rounded-full text-sm font-medium"
+                                    data-product-id="8" data-product-name="Set of Wooden Coasters" data-product-price="22.00" data-product-image="https://placehold.co/600x400/707070/333333?text=Wooden+Coasters">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Detail Page Section -->
+        <section id="product-detail" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto">
+                <div class="flex flex-col md:flex-row gap-12">
+                    <!-- Product Image Gallery -->
+                    <div class="md:w-1/2">
+                        <img id="product-detail-image" src="https://placehold.co/800x600/e0e0e0/333333?text=Product+Image" alt="Product Image" class="w-full rounded-xl shadow-lg mb-4">
+                        <div class="flex space-x-2 overflow-x-auto">
+                            <!-- Thumbnails will be dynamically loaded/updated by JS -->
+                            <img src="https://placehold.co/150x100/e0e0e0/333333?text=View+1" alt="Thumbnail 1" class="product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500 active-thumbnail" data-full-image="https://placehold.co/800x600/e0e0e0/333333?text=Product+Image">
+                            <img src="https://placehold.co/150x100/d0d0d0/333333?text=View+2" alt="Thumbnail 2" class="product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500" data-full-image="https://placehold.co/800x600/d0d0d0/333333?text=Product+Image+2">
+                            <img src="https://placehold.co/150x100/c0c0c0/333333?text=View+3" alt="Thumbnail 3" class="product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500" data-full-image="https://placehold.co/800x600/c0c0c0/333333?text=Product+Image+3">
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="md:w-1/2">
+                        <h1 id="product-detail-name" class="text-4xl font-bold text-gray-800 mb-4">Product Name</h1>
+                        <p class="text-gray-600 text-lg mb-4" id="product-detail-price">$XX.XX</p>
+                        <div class="flex items-center mb-4 text-yellow-500">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                            <span class="text-gray-600 ml-2">(12 Reviews)</span>
+                        </div>
+                        <p id="product-detail-description" class="text-gray-700 leading-relaxed mb-6">
+                            This is a detailed description of the product. It highlights its unique features, materials, craftsmanship, and benefits. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+
+                        <!-- Product Options (e.g., size, color) -->
+                        <div class="mb-6">
+                            <label for="size-select" class="block text-gray-700 font-semibold mb-2">Size:</label>
+                            <select id="size-select" class="p-3 border border-gray-300 rounded-md w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-6">
+                            <label for="quantity-select" class="block text-gray-700 font-semibold">Quantity:</label>
+                            <input type="number" id="quantity-select" value="1" min="1" class="w-20 p-3 border border-gray-300 rounded-md text-center focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <button id="add-to-cart-detail-btn" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Products / More from this Collection -->
+                <div class="mt-20">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">You Might Also Like</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Related Product Card 1 (example) -->
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <img src="https://placehold.co/600x400/b0b0b0/333333?text=Related+Product+1" alt="Related Product 1" class="w-full h-48 object-cover">
+                            <div class="p-4 flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Another Great Item</h3>
+                                <p class="text-gray-600 text-sm">$29.99</p>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <img src="https://placehold.co/600x400/a0a0a0/333333?text=Related+Product+2" alt="Related Product 2" class="w-full h-48 object-cover">
+                            <div class="p-4 flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Complementary Piece</h3>
+                                <p class="text-gray-600 text-sm">$45.00</p>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                            <img src="https://placehold.co/600x400/909090/333333?text=Related+Product+3" alt="Related Product 3" class="w-full h-48 object-cover">
+                            <div class="p-4 flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Similar Style</h3>
+                                <p class="text-gray-600 text-sm">$65.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collections Page Section (Placeholder) -->
+        <section id="collections" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12">Our Curated Collections</h2>
+                <p class="text-lg text-gray-700 mb-8">Explore our hand-picked collections designed to inspire and delight.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Collection Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden product-card">
+                        <img src="https://placehold.co/600x400/7b68ee/ffffff?text=Cozy+Home" alt="Cozy Home Collection" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Cozy Home Essentials</h3>
+                            <p class="text-gray-600 text-sm">Comfort and warmth for your living space.</p>
+                            <a href="#" class="inline-block mt-4 text-indigo-600 hover:underline font-medium">View Collection</a>
+                        </div>
+                    </div>
+                    <!-- Collection Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden product-card">
+                        <img src="https://placehold.co/600x400/8a2be2/ffffff?text=Minimalist+Living" alt="Minimalist Living Collection" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Minimalist Living</h3>
+                            <p class="text-gray-600 text-sm">Clean lines and functional beauty for a serene home.</p>
+                            <a href="#" class="inline-block mt-4 text-indigo-600 hover:underline font-medium">View Collection</a>
+                        </div>
+                    </div>
+                    <!-- Collection Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden product-card">
+                        <img src="https://placehold.co/600x400/4682b4/ffffff?text=Sustainable+Finds" alt="Sustainable Finds Collection" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Sustainable Finds</h3>
+                            <p class="text-gray-600 text-sm">Eco-friendly products for a conscious lifestyle.</p>
+                            <a href="#" class="inline-block mt-4 text-indigo-600 hover:underline font-medium">View Collection</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Cart Page Section -->
+        <section id="cart" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Your Shopping Cart</h2>
+
+                <div id="cart-items-container" class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <!-- Cart items will be rendered here by JavaScript -->
+                    <p id="empty-cart-message" class="text-center text-gray-600 text-lg">Your cart is empty.</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between items-center bg-white rounded-xl shadow-md p-8">
+                    <div class="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
+                        Total: <span id="cart-total">$0.00</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#shop" class="nav-link btn-primary border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-3 px-8 rounded-full text-center">
+                            Continue Shopping
+                        </a>
+                        <a href="#checkout" id="proceed-to-checkout-btn" class="nav-link btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg text-center disabled:opacity-50 disabled:cursor-not-allowed">
+                            Proceed to Checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Page Section -->
+        <section id="checkout" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Checkout</h2>
+
+                <div class="bg-white rounded-xl shadow-md p-8 max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Shipping Information</h3>
+                    <form id="checkout-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="full-name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                            <input type="text" id="full-name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="address" class="block text-gray-700 font-medium mb-2">Address</label>
+                            <input type="text" id="address" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="city" class="block text-gray-700 font-medium mb-2">City</label>
+                            <input type="text" id="city" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="zip" class="block text-gray-700 font-medium mb-2">ZIP Code</label>
+                            <input type="text" id="zip" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="country" class="block text-gray-700 font-medium mb-2">Country</label>
+                            <select id="country" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                                <option value="">Select Country</option>
+                                <option value="USA">United States</option>
+                                <option value="CAN">Canada</option>
+                                <option value="GBR">United Kingdom</option>
+                                <option value="AUS">Australia</option>
+                                <!-- Add more countries as needed -->
+                            </select>
+                        </div>
+
+                        <h3 class="text-2xl font-semibold text-gray-800 mt-8 mb-6 md:col-span-2">Payment Information</h3>
+                        <div>
+                            <label for="card-number" class="block text-gray-700 font-medium mb-2">Card Number</label>
+                            <input type="text" id="card-number" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="XXXX XXXX XXXX XXXX" required>
+                        </div>
+                        <div>
+                            <label for="exp-date" class="block text-gray-700 font-medium mb-2">Expiration Date</label>
+                            <input type="text" id="exp-date" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="MM/YY" required>
+                        </div>
+                        <div>
+                            <label for="cvv" class="block text-gray-700 font-medium mb-2">CVV</label>
+                            <input type="text" id="cvv" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="XXX" required>
+                        </div>
+                        <div class="md:col-span-2 mt-8">
+                            <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg w-full">
+                                Place Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Page Section -->
+        <section id="about" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">About Curated Creations</h2>
+
+                <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <img src="https://placehold.co/1200x600/a0a0a0/ffffff?text=Our+Journey" alt="Our Journey" class="w-full rounded-lg mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Our Story: Passion for Craft and Purpose</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Curated Creations was born from a simple idea: to bring beauty, quality, and meaning into everyday lives through thoughtfully selected products. In a world of mass production, we saw a need for a space where craftsmanship is celebrated, and every item tells a unique story.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Our journey began with a deep appreciation for independent artisans, sustainable practices, and timeless design. We travel (virtually and sometimes physically!) to discover creators who pour their heart and soul into their work, ensuring that each piece we offer meets our high standards of quality and ethical sourcing.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        From the initial spark of an idea to the moment a product arrives at your door, we are committed to transparency, integrity, and a delightful customer experience. We believe that surrounding yourself with beautiful, purposeful objects can truly elevate your living space and well-being.
+                    </p>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 mt-8">Our Values</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                        <li>**Quality Craftsmanship:** We prioritize products made with care, built to last.</li>
+                        <li>**Ethical Sourcing:** Ensuring fair labor practices and responsible material origins.</li>
+                        <li>**Sustainability:** A commitment to eco-friendly options and reducing our footprint.</li>
+                        <li>**Authenticity:** Celebrating unique stories and genuine artistry.</li>
+                        <li>**Customer Delight:** Providing exceptional service and a seamless shopping experience.</li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed">
+                        Thank you for being a part of the Curated Creations community. We're excited to help you discover pieces that resonate with your style and values.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Page Section -->
+        <section id="contact" class="page-section py-16 px-6 md:px-12">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Get in Touch</h2>
+
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <p class="text-gray-700 leading-relaxed mb-6 text-center">
+                        Have a question, feedback, or just want to say hello? We'd love to hear from you!
+                    </p>
+
+                    <form class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="contact-name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input type="text" id="contact-name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-gray-700 font-medium mb-2">Your Email</label>
+                            <input type="email" id="contact-email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="contact-subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="contact-subject" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label for="contact-message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="contact-message" rows="6" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-12 text-center text-gray-700">
+                        <h3 class="text-xl font-semibold mb-4">Other Ways to Connect</h3>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@curatedcreations.com</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> 123 Curated Lane, Design City, DC 90210</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (remains consistent across pages) -->
+    <footer class="bg-gray-800 text-gray-300 py-12 px-6 md:px-12">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Brand Info -->
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Curated Creations</h3>
+                <p class="text-sm leading-relaxed">
+                    Bringing you hand-picked, unique items for a more inspired life. Quality and craftsmanship at its core.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#shop" class="nav-link hover:text-white transition duration-300">Shop All</a></li>
+                    <li><a href="#shop" class="nav-link hover:text-white transition duration-300">New Arrivals</a></li>
+                    <li><a href="#shop" class="nav-link hover:text-white transition duration-300">Best Sellers</a></li>
+                    <li><a href="#shop" class="nav-link hover:text-white transition duration-300">Sale</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Customer Service</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition duration-300">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition duration-300">Shipping & Returns</a></li>
+                    <li><a href="#" class="hover:text-white transition duration-300">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition duration-300">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Social -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Connect With Us</h3>
+                <p class="text-sm mb-4">Email: info@curatedcreations.com</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-pinterest-p text-xl"></i></a>
+                    <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+            &copy; 2025 Curated Creations. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Message Box Modal -->
+    <div id="message-modal" class="fixed inset-0 flex items-center justify-center modal-overlay">
+        <div class="modal-content p-8 rounded-lg text-center relative">
+            <button id="close-modal-btn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            <i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
+            <p id="modal-message" class="text-lg font-semibold text-gray-800 mb-4"></p>
+            <button id="modal-ok-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-full">OK</button>
+        </div>
+    </div>
+
+    <!-- Mode Switcher Buttons -->
+    <div class="mode-switcher">
+        <button id="desktop-mode-btn" class="active-mode">
+            <i class="fas fa-desktop mr-2"></i> Desktop
+        </button>
+        <button id="mobile-mode-btn">
+            <i class="fas fa-mobile-alt mr-2"></i> Mobile
+        </button>
+    </div>
+
+    <script>
+        // Global state for products and cart
+        const products = [
+            { id: '1', name: 'Elegant Ceramic Vase', price: 49.99, image: 'https://placehold.co/600x400/e0e0e0/333333?text=Elegant+Vase', description: 'Handcrafted with a minimalist design, perfect for any home. Made from high-quality ceramic, this vase adds a touch of sophistication to any room. Its sleek lines and matte finish make it a versatile piece for modern and traditional decor alike.',
+              altImages: ['https://placehold.co/800x600/e0e0e0/333333?text=Elegant+Vase+1', 'https://placehold.co/800x600/d0d0d0/333333?text=Elegant+Vase+2', 'https://placehold.co/800x600/c0c0c0/333333?text=Elegant+Vase+3']
+            },
+            { id: '2', name: 'Organic Cotton Blanket', price: 79.00, image: 'https://placehold.co/600x400/d0d0d0/333333?text=Cotton+Blanket', description: 'Soft, breathable, and sustainably sourced for ultimate comfort. This blanket is made from 100% organic cotton, ensuring a gentle touch against your skin and a reduced environmental footprint. Perfect for cozy evenings.',
+              altImages: ['https://placehold.co/800x600/d0d0d0/333333?text=Cotton+Blanket+1', 'https://placehold.co/800x600/c0c0c0/333333?text=Cotton+Blanket+2', 'https://placehold.co/800x600/b0b0b0/333333?text=Cotton+Blanket+3']
+            },
+            { id: '3', name: 'Hand-Poured Soy Candle', price: 24.50, image: 'https://placehold.co/600x400/c0c0c0/333333?text=Soy+Candle', description: 'Infused with natural essential oils for a calming ambiance. Our soy candles are hand-poured in small batches, offering a clean burn and long-lasting fragrance. Choose from a variety of soothing scents to create your perfect atmosphere.',
+              altImages: ['https://placehold.co/800x600/c0c0c0/333333?text=Soy+Candle+1', 'https://placehold.co/800x600/b0b0b0/333333?text=Soy+Candle+2', 'https://placehold.co/800x600/a0a0a0/333333?text=Soy+Candle+3']
+            },
+            { id: '4', name: 'Minimalist Desk Organizer', price: 35.00, image: 'https://placehold.co/600x400/b0b0b0/333333?text=Desk+Organizer', description: 'Keep your workspace tidy with this sleek wooden organizer. Designed for efficiency and aesthetics, it provides dedicated compartments for pens, notes, and small accessories, helping you maintain a clutter-free and productive environment.',
+              altImages: ['https://placehold.co/800x600/b0b0b0/333333?text=Desk+Organizer+1', 'https://placehold.co/800x600/a0a0a0/333333?text=Desk+Organizer+2', 'https://placehold.co/800x600/909090/333333?text=Desk+Organizer+3']
+            },
+            { id: '5', name: 'Premium Leather Wallet', price: 89.99, image: 'https://placehold.co/600x400/a0a0a0/333333?text=Leather+Wallet', description: 'Crafted from full-grain leather, designed for durability and timeless style. This wallet features multiple card slots, a bill compartment, and a coin pocket, combining functionality with elegant design. It ages beautifully with use.',
+              altImages: ['https://placehold.co/800x600/a0a0a0/333333?text=Leather+Wallet+1', 'https://placehold.co/800x600/909090/333333?text=Leather+Wallet+2', 'https://placehold.co/800x600/808080/333333?text=Leather+Wallet+3']
+            },
+            { id: '6', name: 'Modern Aromatherapy Diffuser', price: 59.00, image: 'https://placehold.co/600x400/909090/333333?text=Aromatherapy+Diffuser', description: 'Ultrasonic diffuser with ambient light settings to enhance your relaxation. This sleek diffuser disperses essential oils into a fine mist, humidifying the air and filling your space with your favorite aromas. Features auto-off for safety.',
+              altImages: ['https://placehold.co/800x600/909090/333333?text=Diffuser+1', 'https://placehold.co/800x600/808080/333333?text=Diffuser+2', 'https://placehold.co/800x600/707070/333333?text=Diffuser+3']
+            },
+            { id: '7', name: 'Handmade Ceramic Mug', price: 18.00, image: 'https://placehold.co/600x400/808080/333333?text=Ceramic+Mug', description: 'Unique glazed finish, perfect for your morning coffee or tea. Each mug is individually handmade, resulting in slight variations that make every piece unique. Dishwasher and microwave safe for convenience.',
+              altImages: ['https://placehold.co/800x600/808080/333333?text=Mug+1', 'https://placehold.co/800x600/707070/333333?text=Mug+2', 'https://placehold.co/800x600/606060/333333?text=Mug+3']
+            },
+            { id: '8', name: 'Set of Wooden Coasters', price: 22.00, image: 'https://placehold.co/600x400/707070/333333?text=Wooden+Coasters', description: 'Protect your surfaces with these elegant, natural wood coasters. Crafted from sustainably sourced wood, these coasters feature a smooth finish and a minimalist design that complements any decor. Comes in a set of four.',
+              altImages: ['https://placehold.co/800x600/707070/333333?text=Coasters+1', 'https://placehold.co/800x600/606060/333333?text=Coasters+2', 'https://placehold.co/800x600/505050/333333?text=Coasters+3']
+            }
+        ];
+
+        let cart = []; // Array to store cart items: { productId, name, price, image, quantity }
+
+        // --- DOM Elements ---
+        const mainHeader = document.getElementById('main-header');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const cartIcon = document.getElementById('cart-icon');
+        const cartCountSpan = document.getElementById('cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        const messageModal = document.getElementById('message-modal');
+        const modalMessage = document.getElementById('modal-message');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+        const productLinks = document.querySelectorAll('.product-link'); // Links from product cards to detail page
+
+        // Search bar elements
+        const searchIconButton = document.getElementById('search-icon-button');
+        const searchBarContainer = document.getElementById('search-bar-container');
+        const closeSearchButton = document.getElementById('close-search-button');
+        const searchInput = document.getElementById('search-input');
+
+        // Product Detail Page elements
+        const productDetailImage = document.getElementById('product-detail-image');
+        const productDetailThumbnailsContainer = document.querySelector('#product-detail .flex.space-x-2');
+        const productDetailName = document.getElementById('product-detail-name');
+        const productDetailPrice = document.getElementById('product-detail-price');
+        const productDetailDescription = document.getElementById('product-detail-description');
+        const quantitySelect = document.getElementById('quantity-select');
+        const addToCartDetailBtn = document.getElementById('add-to-cart-detail-btn');
+
+        // Cart Page elements
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartTotalSpan = document.getElementById('cart-total');
+        const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
+
+        // Mode Switcher elements
+        const desktopModeBtn = document.getElementById('desktop-mode-btn');
+        const mobileModeBtn = document.getElementById('mobile-mode-btn');
+
+        // --- Functions ---
+
+        /**
+         * Shows a custom message modal.
+         * @param {string} message - The message to display.
+         */
+        function showMessageModal(message) {
+            modalMessage.textContent = message;
+            modalMessage.classList.add('text-green-500'); // Default success color
+            messageModal.classList.add('show');
+        }
+
+        /**
+         * Hides the custom message modal.
+         */
+        function hideMessageModal() {
+            modalMessage.textContent = ''; // Clear message
+            modalMessage.classList.remove('text-green-500', 'text-red-500'); // Reset color
+            messageModal.classList.remove('show');
+        }
+
+        /**
+         * Updates the cart count displayed in the header.
+         */
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountSpan.textContent = totalItems;
+            // Add a subtle bounce animation to the cart count
+            cartCountSpan.classList.add('animate-pop');
+            setTimeout(() => {
+                cartCountSpan.classList.remove('animate-pop');
+            }, 300); // Match animation duration
+        }
+
+        /**
+         * Adds a product to the cart or updates its quantity if already present.
+         * @param {object} product - The product object to add.
+         * @param {number} quantity - The quantity to add.
+         */
+        function addToCart(product, quantity = 1) {
+            const existingItemIndex = cart.findIndex(item => item.productId === product.id);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+            updateCartCount();
+            showMessageModal(`${product.name} (${quantity}) added to cart!`);
+            renderCartItems(); // Re-render cart if on cart page
+        }
+
+        /**
+         * Renders the items in the shopping cart on the cart page.
+         */
+        function renderCartItems() {
+            cartItemsContainer.innerHTML = ''; // Clear existing items
+            let total = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                proceedToCheckoutBtn.classList.add('disabled:opacity-50', 'disabled:cursor-not-allowed');
+                proceedToCheckoutBtn.href = '#'; // Disable link
+            } else {
+                emptyCartMessage.classList.add('hidden');
+                proceedToCheckoutBtn.classList.remove('disabled:opacity-50', 'disabled:cursor-not-allowed');
+                proceedToCheckoutBtn.href = '#checkout'; // Enable link
+
+                const cartTable = document.createElement('table');
+                cartTable.className = 'w-full text-left table-auto border-collapse';
+                cartTable.innerHTML = `
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="py-3 px-4 text-gray-600 font-semibold">Product</th>
+                            <th class="py-3 px-4 text-gray-600 font-semibold">Price</th>
+                            <th class="py-3 px-4 text-gray-600 font-semibold">Quantity</th>
+                            <th class="py-3 px-4 text-gray-600 font-semibold">Subtotal</th>
+                            <th class="py-3 px-4 text-gray-600 font-semibold"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-table-body">
+                    </tbody>
+                `;
+                cartItemsContainer.appendChild(cartTable);
+                const cartTableBody = document.getElementById('cart-table-body');
+
+                cart.forEach(item => {
+                    const itemSubtotal = item.price * item.quantity;
+                    total += itemSubtotal;
+
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-gray-100 hover:bg-gray-50';
+                    row.innerHTML = `
+                        <td class="py-4 px-4 flex items-center">
+                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            <span class="font-medium text-gray-800">${item.name}</span>
+                        </td>
+                        <td class="py-4 px-4 text-gray-700">$${item.price.toFixed(2)}</td>
+                        <td class="py-4 px-4">
+                            <input type="number" value="${item.quantity}" min="1"
+                                class="w-20 p-2 border border-gray-300 rounded-md text-center quantity-input"
+                                data-product-id="${item.productId}">
+                        </td>
+                        <td class="py-4 px-4 text-gray-700">$${itemSubtotal.toFixed(2)}</td>
+                        <td class="py-4 px-4">
+                            <button class="text-red-500 hover:text-red-700 remove-from-cart-btn" data-product-id="${item.productId}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    `;
+                    cartTableBody.appendChild(row);
+                });
+
+                // Add event listeners for quantity changes and remove buttons
+                cartTableBody.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', (event) => {
+                        const productId = event.target.dataset.productId;
+                        const newQuantity = parseInt(event.target.value);
+                        updateCartItemQuantity(productId, newQuantity);
+                    });
+                });
+
+                cartTableBody.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const productId = event.target.closest('button').dataset.productId;
+                        removeFromCart(productId);
+                    });
+                });
+            }
+            cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+        }
+
+        /**
+         * Updates the quantity of a product in the cart.
+         * @param {string} productId - The ID of the product.
+         * @param {number} newQuantity - The new quantity.
+         */
+        function updateCartItemQuantity(productId, newQuantity) {
+            const item = cart.find(item => item.productId === productId);
+            if (item) {
+                if (newQuantity > 0) {
+                    item.quantity = newQuantity;
+                } else {
+                    removeFromCart(productId); // Remove if quantity is 0 or less
+                }
+                updateCartCount();
+                renderCartItems();
+            }
+        }
+
+        /**
+         * Removes a product from the cart.
+         * @param {string} productId - The ID of the product to remove.
+         */
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.productId !== productId);
+            updateCartCount();
+            renderCartItems();
+            showMessageModal('Item removed from cart.');
+        }
+
+        /**
+         * Displays a specific page section and hides others.
+         * @param {string} pageId - The ID of the page section to display (e.g., 'home', 'shop').
+         * @param {string} productId - Optional. The ID of the product to load if navigating to 'product-detail'.
+         */
+        function showPage(pageId, productId = null) {
+            // Hide all pages first with a slight delay for transition
+            pageSections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                // Allow CSS transition to complete before making visible
+                setTimeout(() => {
+                    targetPage.classList.add('active');
+                    window.scrollTo(0, 0); // Scroll to top of the page
+
+                    // Specific logic for product-detail page
+                    if (pageId === 'product-detail' && productId) {
+                        const product = products.find(p => p.id === productId);
+                        if (product) {
+                            productDetailImage.src = product.image;
+                            productDetailName.textContent = product.name;
+                            productDetailPrice.textContent = `$${product.price.toFixed(2)}`;
+                            productDetailDescription.textContent = product.description;
+                            quantitySelect.value = 1; // Reset quantity
+                            addToCartDetailBtn.dataset.productId = product.id;
+                            addToCartDetailBtn.dataset.productName = product.name;
+                            addToCartDetailBtn.dataset.productPrice = product.price;
+                            addToCartDetailBtn.dataset.productImage = product.image;
+
+                            // Populate and update product thumbnails
+                            productDetailThumbnailsContainer.innerHTML = '';
+                            const imagesToDisplay = [product.image, ...(product.altImages || [])];
+                            imagesToDisplay.forEach((imgSrc, index) => {
+                                const img = document.createElement('img');
+                                img.src = imgSrc;
+                                img.alt = `Product Thumbnail ${index + 1}`;
+                                img.className = `product-thumbnail w-24 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-indigo-500 ${index === 0 ? 'active-thumbnail' : ''}`;
+                                img.dataset.fullImage = imgSrc;
+                                img.addEventListener('click', () => {
+                                    productDetailImage.src = imgSrc;
+                                    // Remove active class from all thumbnails
+                                    document.querySelectorAll('.product-thumbnail').forEach(thumb => thumb.classList.remove('active-thumbnail'));
+                                    // Add active class to clicked thumbnail
+                                    img.classList.add('active-thumbnail');
+                                });
+                                productDetailThumbnailsContainer.appendChild(img);
+                            });
+
+                        } else {
+                            // Handle product not found, maybe redirect to shop page
+                            showPage('shop');
+                            showMessageModal('Product not found.');
+                        }
+                    } else if (pageId === 'cart') {
+                        renderCartItems(); // Ensure cart is rendered when navigating to it
+                    }
+                }, 100); // Small delay to allow fade-out of previous page
+            }
+            mobileMenu.classList.add('hidden'); // Hide mobile menu on navigation
+            searchBarContainer.classList.remove('active'); // Hide search bar on navigation
+        }
+
+        // --- Event Listeners ---
+
+        // Mobile Menu Toggle
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            searchBarContainer.classList.remove('active'); // Hide search bar if mobile menu opens
+        });
+
+        // Navigation Links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = event.target.getAttribute('href').substring(1); // Remove '#'
+                showPage(targetId);
+            });
+        });
+
+        // Add to Cart buttons on Home/Shop pages
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const productId = event.target.dataset.productId;
+                const product = products.find(p => p.id === productId);
+                if (product) {
+                    addToCart(product, 1);
+                }
+            });
+        });
+
+        // Add to Cart button on Product Detail page
+        addToCartDetailBtn.addEventListener('click', (event) => {
+            const productId = event.target.dataset.productId;
+            const quantity = parseInt(quantitySelect.value);
+            const product = products.find(p => p.id === productId);
+            if (product && quantity > 0) {
+                addToCart(product, quantity);
+            } else if (quantity <= 0) {
+                showMessageModal('Please enter a valid quantity.');
+            }
+        });
+
+        // Product links (from cards to detail page)
+        productLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const productId = event.currentTarget.dataset.productId;
+                showPage('product-detail', productId);
+            });
+        });
+
+        // Cart icon click
+        cartIcon.addEventListener('click', (event) => {
+            event.preventDefault();
+            showPage('cart');
+        });
+
+        // Modal close buttons
+        closeModalBtn.addEventListener('click', hideMessageModal);
+        modalOkBtn.addEventListener('click', hideMessageModal);
+
+        // Close modal if clicking outside the content
+        messageModal.addEventListener('click', (event) => {
+            if (event.target === messageModal) {
+                hideMessageModal();
+            }
+        });
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('header-scrolled');
+            } else {
+                mainHeader.classList.remove('header-scrolled');
+            }
+        });
+
+        // Search bar toggle functionality
+        searchIconButton.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('active');
+            if (searchBarContainer.classList.contains('active')) {
+                searchInput.focus(); // Focus on the input when it appears
+                mobileMenu.classList.add('hidden'); // Hide mobile menu if search bar opens
+            }
+        });
+
+        closeSearchButton.addEventListener('click', () => {
+            searchBarContainer.classList.remove('active');
+            searchInput.value = ''; // Clear search input
+        });
+
+        // Mode Switcher functionality
+        desktopModeBtn.addEventListener('click', () => {
+            document.body.classList.remove('mobile-mode');
+            desktopModeBtn.classList.add('active-mode');
+            mobileModeBtn.classList.remove('active-mode');
+        });
+
+        mobileModeBtn.addEventListener('click', () => {
+            document.body.classList.add('mobile-mode');
+            mobileModeBtn.classList.add('active-mode');
+            desktopModeBtn.classList.remove('active-mode');
+        });
+
+        // Initial page load based on hash or default to home
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                // Check if it's a product detail link with a specific product ID
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = urlParams.get('id');
+
+                if (initialHash === 'product-detail' && productId) {
+                    showPage('product-detail', productId);
+                } else {
+                    showPage(initialHash);
+                }
+            } else {
+                showPage('home');
+            }
+            updateCartCount(); // Initialize cart count
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('hashchange', () => {
+            const newHash = window.location.hash.substring(1);
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (newHash === 'product-detail' && productId) {
+                showPage('product-detail', productId);
+            } else if (newHash) {
+                showPage(newHash);
+            } else {
+                showPage('home');
+            }
+        });
+
+        // Handle checkout form submission (placeholder)
+        const checkoutForm = document.getElementById('checkout-form');
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                // In a real application, you would send this data to a server
+                showMessageModal('Order Placed Successfully! Thank you for your purchase.');
+                cart = []; // Clear cart after successful order
+                updateCartCount();
+                renderCartItems();
+                // Optionally redirect to a confirmation page or home
+                setTimeout(() => { hideMessageModal(); showPage('home'); }, 2000);
+            });
+        }
+
+        // Handle contact form submission (placeholder)
+        const contactForm = document.querySelector('#contact form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                // In a real application, you would send this data to a server
+                showMessageModal('Your message has been sent! We will get back to you soon.');
+                contactForm.reset(); // Clear the form
+                setTimeout(() => { hideMessageModal(); }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
